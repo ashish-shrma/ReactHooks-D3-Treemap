@@ -1,6 +1,11 @@
 import React from 'react';
 import './TodoList.styles.scss';
-import { Select, MenuItem } from '@material-ui/core';
+import {
+  RadioGroup,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+} from '@material-ui/core';
 
 import Todo from '../Todo/Todo.component';
 
@@ -10,12 +15,25 @@ const TodoList = ({ todos, setTodos, filteredTodos, status, setStatus }) => {
   };
   return (
     <div>
-      <div className="select">
-        <Select name="todos" onChange={statusHandler} value={status}>
-          <MenuItem value="all">All</MenuItem>
-          <MenuItem value="completed">Completed</MenuItem>
-          <MenuItem value="uncompleted">Uncompleted</MenuItem>
-        </Select>
+      <div>
+        <RadioGroup name="todos" onChange={statusHandler} value={status}>
+          <FormLabel component="legend">Tasks</FormLabel>
+          <FormControlLabel
+            control={<Radio color="primary" />}
+            value="all"
+            label="All"
+          />
+          <FormControlLabel
+            control={<Radio color="primary" />}
+            value="completed"
+            label="Completed"
+          />
+          <FormControlLabel
+            control={<Radio color="primary" v />}
+            value="uncompleted"
+            label="Uncompleted"
+          />
+        </RadioGroup>
       </div>
       <ul>
         {filteredTodos.map((todo, idx) => (
