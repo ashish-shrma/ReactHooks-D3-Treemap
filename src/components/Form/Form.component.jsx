@@ -16,6 +16,9 @@ import { useForm, Controller } from 'react-hook-form';
 import CustomButton from '../CustomButton/CustomButton.component';
 
 const Form = ({ setTodos, todos }) => {
+  const date = new Date().toLocaleDateString();
+  const time = new Date().toLocaleTimeString();
+  const today = date + ' ' + time;
   const { register, handleSubmit, control } = useForm({
     defaultValues: {
       task: '',
@@ -30,6 +33,8 @@ const Form = ({ setTodos, todos }) => {
       {
         text: task,
         completed: false,
+        dateCompleted: false,
+        dateAdded: today,
         category: category,
         deadline: deadline,
         priority: priority,

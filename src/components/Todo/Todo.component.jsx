@@ -5,13 +5,25 @@ const Todo = ({ setTodos, allTodos, todo }) => {
     setTodos(allTodos.filter((el) => el.id !== todo.id));
   };
   const completeHandler = () => {
+    const date = new Date().toLocaleDateString();
+    const time = new Date().toLocaleTimeString();
+    const today = date + ' ' + time;
     setTodos(
       allTodos.map((item) => {
         if (item.id === todo.id) {
-          return {
-            ...item,
-            completed: !item.completed,
-          };
+          if (item.completed) {
+            return {
+              ...item,
+              completed: !item.completed,
+              dateCompleted: false,
+            };
+          } else {
+            return {
+              ...item,
+              completed: !item.completed,
+              dateCompleted: today,
+            };
+          }
         }
         return item;
       })
