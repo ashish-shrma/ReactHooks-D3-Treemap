@@ -1,7 +1,16 @@
 .container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+
   flex-wrap: wrap;
-  align-content: space-between;
+}
+.input-field {
+  width: 50em;
+}
+.category {
+  width: 12em;
+}
+.radio-container {
+  flex-direction: row;
+  margin: 0px;
 }

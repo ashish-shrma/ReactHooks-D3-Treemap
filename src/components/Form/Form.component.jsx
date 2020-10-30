@@ -10,12 +10,34 @@ import {
   FormControlLabel,
   FormLabel,
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 import { useForm, Controller } from 'react-hook-form';
 
 import CustomButton from '../CustomButton/CustomButton.component';
 
+const useStyles = makeStyles({
+  root: {
+    width: '100%',
+    fontFamily: 'inherit',
+    fontSize: '20px',
+  },
+  dropdown: {
+    width: '100%',
+  },
+  radio: {
+    flexDirection: 'row',
+    flexWrap: 'initial',
+  },
+  radiolabel: {
+    position: 'absolute',
+    fontSize: '12px',
+    margin: '0 0 0 1em',
+  },
+});
+
 const Form = ({ setTodos, todos }) => {
+  const classes = useStyles();
   const date = new Date().toLocaleDateString();
   const time = new Date().toLocaleTimeString();
   const today = date + ' ' + time;
@@ -52,12 +74,7 @@ const Form = ({ setTodos, todos }) => {
     'Learning',
   ];
 
-  const priorityList = [
-    'Normal',
-    'Urgent',
-    "Should've been done yesterday",
-    'The fabric of spacetime might tear if this not done"',
-  ];
+  const priorityList = ['Normal', 'Urgent', "Should've been done yesterday"];
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -68,29 +85,32 @@ const Form = ({ setTodos, todos }) => {
             type="text"
             placeholder="Enter your task here..."
             inputRef={register}
+            className={classes.root}
+          />
+        </div>
+        <div className="category">
+          <Controller
+            as={
+              <Select className={classes.dropdown}>
+                {categoryList.map((category, idx) => (
+                  <MenuItem key={idx} value={category}>
+                    {category}
+                  </MenuItem>
+                ))}
+              </Select>
+            }
+            control={control}
+            name="category"
           />
         </div>
 
-        <Controller
-          as={
-            <Select>
-              {categoryList.map((category, idx) => (
-                <MenuItem key={idx} value={category}>
-                  {category}
-                </MenuItem>
-              ))}
-            </Select>
-          }
-          control={control}
-          name="category"
-        />
-        <div className="category"></div>
-
-        <div>
+        <div className="radio-container">
           <Controller
             as={
-              <RadioGroup name="priority">
-                <FormLabel component="legend">Priority</FormLabel>
+              <RadioGroup name="priority" className={classes.radio}>
+                <FormLabel component="legend" className={classes.radiolabel}>
+                  Priority
+                </FormLabel>
                 {priorityList.map((label, idx) => (
                   <FormControlLabel
                     value={`${idx + 1}`}

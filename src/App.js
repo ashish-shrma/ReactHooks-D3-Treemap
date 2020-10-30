@@ -5,6 +5,8 @@ import Form from './components/Form/Form.component';
 import TodoList from './components/TodoList/TodoList.component';
 import TreeMap from './components/TreeMap/TreeMap.component';
 
+import Card from '@material-ui/core/Card';
+
 function App() {
   const [todos, setTodos] = useState([]);
   const [status, setStatus] = useState('all');
@@ -120,15 +122,29 @@ function App() {
       <header>
         <h1>Toodles</h1>
       </header>
-      <Form todos={todos} setTodos={setTodos} />
-      <TreeMap width={600} height={400} data={dataset} />
-      <TodoList
-        todos={todos}
-        setTodos={setTodos}
-        setStatus={setStatus}
-        status={status}
-        filteredTodos={filteredTodos}
-      />
+      <Card>
+        <div className="form">
+          <Form todos={todos} setTodos={setTodos} />
+        </div>
+      </Card>
+
+      <Card>
+        <div className="treemap">
+          <TreeMap width={600} height={400} data={dataset} />
+        </div>
+      </Card>
+
+      <Card>
+        <div className="todo-list">
+          <TodoList
+            todos={todos}
+            setTodos={setTodos}
+            setStatus={setStatus}
+            status={status}
+            filteredTodos={filteredTodos}
+          />
+        </div>
+      </Card>
     </div>
   );
 }
