@@ -4,6 +4,8 @@ import './App.css';
 import Form from './components/Form/Form.component';
 import TodoList from './components/TodoList/TodoList.component';
 import TreeMap from './components/TreeMap/TreeMap.component';
+import Treemap2 from './components/treemap2/treemap2.component';
+import Legend from './components/Legend/Legend.component';
 
 import Card from '@material-ui/core/Card';
 
@@ -40,7 +42,7 @@ function App() {
     name: 'TODO',
     children: [
       {
-        name: 'Recreation',
+        name: 'Work',
         children: [
           { name: 'Easing', value: 17010 },
           { name: 'FunctionSequence', value: 5842 },
@@ -56,7 +58,7 @@ function App() {
         ],
       },
       {
-        name: 'Work',
+        name: 'Recreation',
         children: [
           { name: 'FunctionSequence', value: 5842 },
           { name: 'ISchedulable', value: 1041 },
@@ -80,7 +82,7 @@ function App() {
         ],
       },
       {
-        name: 'Chores',
+        name: 'Health',
         children: [
           { name: 'DirtySprite', value: 8833 },
           { name: 'LineSprite', value: 1732 },
@@ -89,11 +91,11 @@ function App() {
         ],
       },
       {
-        name: 'Learning',
+        name: 'Chores',
         children: [{ name: 'FlareVis', value: 4116 }],
       },
       {
-        name: 'Health',
+        name: 'Learning',
         children: [
           { name: 'DragForce', value: 1082 },
           { name: 'GravityForce', value: 1336 },
@@ -122,6 +124,7 @@ function App() {
       <header>
         <h1>Toodles</h1>
       </header>
+
       <Card>
         <div className="form">
           <Form todos={todos} setTodos={setTodos} />
@@ -130,8 +133,12 @@ function App() {
 
       <Card>
         <div className="treemap">
-          <TreeMap width={600} height={400} data={dataset} />
+          <TreeMap width="1225" height="800" data={dataset} />
         </div>
+      </Card>
+      <Card>
+        {' '}
+        <Legend height="400" />
       </Card>
 
       <Card>
@@ -145,6 +152,8 @@ function App() {
           />
         </div>
       </Card>
+
+      {/* <Treemap2 width="1225" height="800" data={dataset} /> */}
     </div>
   );
 }

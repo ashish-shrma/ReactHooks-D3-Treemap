@@ -29,10 +29,10 @@ const useStyles = makeStyles({
     flexDirection: 'row',
     flexWrap: 'initial',
   },
-  radiolabel: {
+  label: {
     position: 'absolute',
     fontSize: '12px',
-    margin: '0 0 0 1em',
+    margin: '0 1em 0 0',
   },
 });
 
@@ -74,12 +74,20 @@ const Form = ({ setTodos, todos }) => {
     'Learning',
   ];
 
-  const priorityList = ['Normal', 'Urgent', "Should've been done yesterday"];
+  const priorityList = [
+    'Normal',
+    'Urgent',
+    "Should've been done yesterday",
+    'The fate of entire humanity depends on this',
+  ];
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="container">
         <div className="input-field">
+          <FormLabel component="legend" className={classes.label}>
+            Task
+          </FormLabel>
           <TextField
             name="task"
             type="text"
@@ -89,6 +97,9 @@ const Form = ({ setTodos, todos }) => {
           />
         </div>
         <div className="category">
+          <FormLabel component="legend" className={classes.label}>
+            Category
+          </FormLabel>
           <Controller
             as={
               <Select className={classes.dropdown}>
@@ -103,12 +114,26 @@ const Form = ({ setTodos, todos }) => {
             name="category"
           />
         </div>
+        <div>
+          <FormLabel component="legend" className={classes.label}>
+            Deadline
+          </FormLabel>
+          <TextField
+            id="datetime-local"
+            type="datetime-local"
+            inputRef={register}
+            name="deadline"
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        </div>
 
         <div className="radio-container">
           <Controller
             as={
               <RadioGroup name="priority" className={classes.radio}>
-                <FormLabel component="legend" className={classes.radiolabel}>
+                <FormLabel component="legend" className={classes.label}>
                   Priority
                 </FormLabel>
                 {priorityList.map((label, idx) => (
@@ -125,18 +150,7 @@ const Form = ({ setTodos, todos }) => {
             control={control}
           />
         </div>
-        <div>
-          <TextField
-            id="datetime-local"
-            label="Deadline"
-            type="datetime-local"
-            inputRef={register}
-            name="deadline"
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-        </div>
+
         <div className="add-button">
           <CustomButton type="submit">
             <i className="fas fa-plus-circle"></i>

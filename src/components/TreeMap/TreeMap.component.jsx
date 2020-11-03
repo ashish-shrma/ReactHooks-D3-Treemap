@@ -27,24 +27,24 @@ function TreeMap({ width, height, data }) {
 
     // });
 
-    var dataAggregated = hierarchy(data)
+    let dataAggregated = hierarchy(data)
       .sum((d) => d.value)
       .sort(function (a, b) {
         return b.height - a.height || b.value - a.value;
       });
 
-    var layout = treemap()
+    let layout = treemap()
       .tile(treemapResquarify)
       .size([width, height])
       .paddingInner(3);
 
-    var rootWithLayout = layout(dataAggregated);
+    let rootWithLayout = layout(dataAggregated);
 
-    var x = scaleLinear().domain([0, width]).range([0, width]);
+    let x = scaleLinear().domain([0, width]).range([0, width]);
 
-    var y = scaleLinear().domain([0, height]).range([50, height]);
+    let y = scaleLinear().domain([0, height]).range([50, height]);
 
-    var color = scaleOrdinal().range([
+    let color = scaleOrdinal().range([
       '#17A398',
       '#9BBDF9',
       '#B95A89',
@@ -57,6 +57,7 @@ function TreeMap({ width, height, data }) {
       let selparent = dataAggregated;
 
       let nodes = svg.selectAll('.node').data(rootWithLayout.leaves());
+      console.log(selparent.children);
 
       nodes
         .enter()
@@ -64,7 +65,7 @@ function TreeMap({ width, height, data }) {
         .attr('class', 'node')
         .merge(nodes)
         .on('click', function (event, d) {
-          selparent = d.parent.parent;
+          selparent = d.parent.parent; //remove?
           x.domain([d.parent.x0, d.parent.x0 + d.parent.x1 - d.parent.x0]);
           y.domain([d.parent.y0, d.parent.y0 + d.parent.y1 - d.parent.y0]);
           update();
